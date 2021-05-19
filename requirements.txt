@@ -1,6 +1,8 @@
 numpy==1.19.2
-torch==1.8.0
+torch==1.1.0
 tensorboardX==2.1
-Pillow==8.0.1
-scikit-learn==0.23.2
+Pillow==6.0.0
+scikit-learn==0.19.2
 pickle==4.0
+scipy==1.1.0
+opencv-python==4.1.0

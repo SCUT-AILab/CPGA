@@ -14,7 +14,11 @@ git clone https://github.com/SCUT-AILab/CPGA.git
 cd CPGA
 ```
 
-2. Install pytorch and other dependencies.
+2. Install the requirements by runing the following command:
+```
+pip install -r requirements.txt
+```
+
 ## Data Preparation
 - The `.pkl` files of data list and its corresponding labels have been put in the directory `./data`.
 

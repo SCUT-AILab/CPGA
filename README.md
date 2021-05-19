@@ -3,24 +3,14 @@ This repository provides the official implementation for "**Source-free Domain A
 
 # Paper
 [Source-free Domain Adaptation via Avatar Prototype Generation and Adaptation](...)
-描述图
 ![CPGA](./results/archi.png "An overview of CPGA")
-
-requirement.txt
-# Dependencies
-- Python 3.7
-- PyTorch 1.1.0
-- TensorboardX 2.1
-- Numpy
-- Pickle 
-- Pillow
-- Scikit-learn 
+To handle source-free domain adaptation task, we propose a Contrastive Prototype Generation and Adaptation (CPGA) method. Specifically, CPGA consists of two stage: (1) **Prototype generation**: under the guidance of the fixed classifier, a generator $G_{g}$ is trained to generate avatar feature prototypes via $\mathcal{L}_{ce}$ and $\mathcal{L}_{con}^{p}$. (2) **Protype adaptation**: in each training batch, we use the learned prototype generator to generate one prototype for each class. Based on the generated prototypes and pseudo labels obtained by clustering, we align each pseudo-labeled target feature to the corresponding class prototype by training a domain-invariant feature extractor via $\mathcal{L}_{con}^{w}$, $\mathcal{L}_{elr}$ and $\mathcal{L}_{nc}$. Note that the classifier $C_{y}$ is fixed during the whole training phase.
 
 # Getting Started
 ## Installation
 1. Clone this repository:
 ```
-git clone 
+git clone https://github.com/SCUT-AILab/CPGA.git
 cd CPGA
 ```
 
@@ -42,13 +32,14 @@ python train_source --gpu 0 --data_root ./dataset/VISDA-C/train --label_file ./d
 ```
 python main --gpu 0,1 --max_epoch --source_model_path ./model_source/20201025-1042-synthesis_resnet101_best.pkl --data_path ./dataset/VISDA-C/validation --label_file ./data/visda_real_train.pkl
 ```
-提供模型
+
 
 ## Testing 
 To test CPGA on the target domain using the trained model (please assign a trained model path)
 ```
 python test --gpu 0 --model_path ./model_VISDA-C --data_path ./dataset/VISDA-C/validation --label_file ./data/visda_real_train.pkl
 ```
+<!-- 提供模型 -->
 
 # Citation
 If you find our work useful in your research, please cite the following paper:

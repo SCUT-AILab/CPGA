@@ -34,7 +34,7 @@ python train_source --gpu 0 --data_root ./dataset/VISDA-C/train --label_file ./d
 
 - Second, to train CPGA on the target domain:
 ```
-python main --gpu 0,1 --max_epoch --source_model_path ./model_source/20201025-1042-synthesis_resnet101_best.pkl --data_path ./dataset/VISDA-C/validation --label_file ./data/visda_real_train.pkl
+python main --gpu 0,1 --max_epoch 400 --source_model_path ./model_source/20201025-1042-synthesis_resnet101_best.pkl --data_path ./dataset/VISDA-C/validation --label_file ./data/visda_real_train.pkl
 ```
 
 

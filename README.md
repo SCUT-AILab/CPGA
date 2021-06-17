@@ -8,13 +8,13 @@ To handle source-free domain adaptation task, we propose a Contrastive Prototype
 
 # Getting Started
 ## Installation
-1. Clone this repository:
+- Clone this repository:
 ```
 git clone https://github.com/SCUT-AILab/CPGA.git
 cd CPGA
 ```
 
-2. Install the requirements by runing the following command:
+- Install the requirements by runing the following command:
 ```
 pip install -r requirements.txt
 ```
@@ -45,6 +45,20 @@ python test --gpu 0 --model_path ./model_VISDA-C --data_path ./dataset/VISDA-C/v
 ```
 <!-- 提供模型 -->
 
+## Results
+Classification accuracies (%) on the large-scale **VisDA** dataset (ResNet-101).
+  
+|  Method   | plane   |bicycle   |bus   |car   |horse   |knife   |mcycl   |person   |plant   |sktbrd   |train   |truck   |Per-class | pre-training |
+|  :----:  | :----:  | :----:  |:----:  |:----:  |:----:  |:----:  |:----:  |:----:  |:----:  |:----:  |:----:  |:----:  |:----:  |:----:  |
+| ResNet-101  |55.1|53.3|61.9|59.1|80.6|17.9|79.7|31.2|81.0|26.5|73.5|8.5| 52.4 |- |
+| PrDA  |86.9|81.7|84.6|63.9|93.1|91.4|86.6|71.9|84.5|58.2|74.5|42.7| 76.6 |- |
+| SHOT  |92.6|81.1|80.1|58.5|89.7|86.1|81.5|77.8|89.5|84.9|84.3|49.3| 79.6 |- |
+| MA  |94.8|73.4|68.8|74.8|93.1|95.4|88.6|84.7|89.1|84.7|83.5|48.1| 81.6 |- |
+| BAIT  |93.7|83.2|84.5|65.0|92.9|95.4|88.1|80.8|90.0|89.0|84.0|45.3| 82.7 |- |
+| CPGA (ours)  |95.6|89.0|75.4|64.9|91.7|97.5|89.7|83.8|93.9|93.4|87.7|69.0| 86.0 |[Download](https://drive.google.com/file/d/1LyRdK_CxHjY8QRklG65xErl7P4Itv7hM/view?usp=sharing) |
+
+
+
 # Citation
 If you find our work useful in your research, please cite the following paper:
 ```
@@ -54,4 +68,11 @@ If you find our work useful in your research, please cite the following paper:
   booktitle={International Joint Conference on Artificial Intelligence},
   year={2021}
 }
+```
+
+# Contact
+For any question, please file an issue or contact
+```
+Zhen Qiu: seqiuzhen@mail.scut.edu.cn
+Hongbin Lin: sehongbinlin@mail.scut.edu.cn
 ```

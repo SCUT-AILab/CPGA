@@ -48,7 +48,7 @@ python test --gpu 0 --model_path ./model_VISDA-C --data_path ./dataset/VISDA-C/v
 ## Results
 Classification accuracies (%) on the large-scale **VisDA** dataset (ResNet-101).
   
-|  Method   | plane   |bicycle   |bus   |car   |horse   |knife   |mcycl   |person   |plant   |sktbrd   |train   |truck   |Per-class | pre-training |
+|  Method   | Plane   |Bicycle   |Bus   |Car   |Horse   |Knife   |Mcycl   |Person   |Plant   |Sktbrd   |Train   |Truck   |Per-class | Pre-training |
 |  :----:  | :----:  | :----:  |:----:  |:----:  |:----:  |:----:  |:----:  |:----:  |:----:  |:----:  |:----:  |:----:  |:----:  |:----:  |
 | ResNet-101  |55.1|53.3|61.9|59.1|80.6|17.9|79.7|31.2|81.0|26.5|73.5|8.5| 52.4 |- |
 | PrDA  |86.9|81.7|84.6|63.9|93.1|91.4|86.6|71.9|84.5|58.2|74.5|42.7| 76.6 |- |

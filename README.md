@@ -1,4 +1,3 @@
-<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
 # <center>Source-free Domain Adaptation via Avatar Prototype Generation and Adaptation</center>
 This repository provides the official implementation for "**Source-free Domain Adaptation via Avatar Prototype Generation and Adaptation**". (IJCAI2021)
 

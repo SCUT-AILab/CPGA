@@ -14,7 +14,7 @@ import argparse
 from dataset import visDataset_target
 
 
-def val_office(net, test_loader):
+def val_source(net, test_loader):
     net.eval()
     correct = 0
     total = 0
@@ -74,11 +74,11 @@ def val_pclass(net, test_loader):
 
 def arg_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--gpu', default='0', help='gpu device_ids for cuda')
+    parser.add_argument('--gpu', default='2', help='gpu device_ids for cuda')
     parser.add_argument('--batchsize', default=64, type=int)
-    parser.add_argument('--model_path', default='./model_source/20201025-1042-synthesis_resnet101_best.pkl', type=str,
+    parser.add_argument('--test_path', default='/mnt/cephfs/home/qiuzhen/244/code/OCT_DAL/model_ada/model_visda/20201219-1254max_acca2w-our_best.pkl', type=str,
                         help='path to the pre-trained source model')
-    parser.add_argument('--data_path', default='/home/linhongbin/UDA/dataset/VISDA-C/validation', type=str,
+    parser.add_argument('--data_path', default='/mnt/cephfs/home/linhongbin/UDA/dataset/VISDA-C/validation', type=str,
                         help='path to target data')
     parser.add_argument('--label_file', default='./data/visda_real_train.pkl', type=str)
 
@@ -89,7 +89,7 @@ def arg_parser():
 if __name__ == '__main__':
     args = arg_parser()
     os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
-    net = torch.load(args.source_model_path).cuda()
+    net = torch.load(args.test_path).cuda()
     net = net.module
     transform_test = transforms.Compose([
         transforms.Resize((256, 256)),
@@ -98,7 +98,7 @@ if __name__ == '__main__':
         transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),  # grayscale mean/std
     ])
 
-    val_dataset = visDataset_target(args.path, args.label_file, train=False, transform=transform_test)
+    val_dataset = visDataset_target(args.data_path, args.label_file, train=False, transform=transform_test)
     val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=args.batchsize, shuffle=False,
                                              num_workers=2)
     acc = val_pclass(net, val_loader)

@@ -24,7 +24,7 @@ pip install -r requirements.txt
 
 <!-- - Download the Pneumonia and COVID-19 dataset and put the data in this repo.
     - Link: [datasets](https://drive.google.com/open?id=1FcXIYJBtfvc1dN54R4cad9cuKVzS8WOb) -->
-- Please manually download the [VisDA-C](https://github.com/VisionLearningGroup/taskcv-2017-public/tree/master/classification) benchmark from the official websites.
+- Please manually download the [VisDA-C](https://github.com/VisionLearningGroup/taskcv-2017-public/tree/master/classification) benchmark from the official websites and put it in the directory `./dataset`.
 
 ## Training
 - First, to obtain the pre-trained model on the source domain:
@@ -32,16 +32,16 @@ pip install -r requirements.txt
 python train_source --gpu 0 --data_root ./dataset/VISDA-C/train --label_file ./data/visda_synthesis_9_1_split.pkl
 ```
 
-- Second, to train CPGA on the target domain:
+- Second, to train CPGA on the target domain (please assign a source-trained model path):
 ```
-python main --gpu 0,1 --max_epoch 400 --source_model_path ./model_source/20201025-1042-synthesis_resnet101_best.pkl --data_path ./dataset/VISDA-C/validation --label_file ./data/visda_real_train.pkl
+python main --gpu 0,1 --max_epoch 1400 --source_model_path ./model_source/synthesis_resnet101_best.pkl --data_path ./dataset/VISDA-C/validation --label_file ./data/visda_real_train.pkl
 ```
 
 
 ## Testing 
 To test CPGA on the target domain using the trained model (please assign a trained model path)
 ```
-python test --gpu 0 --model_path ./model_VISDA-C --data_path ./dataset/VISDA-C/validation --label_file ./data/visda_real_train.pkl
+python test --gpu 0 --model_path ./model_VISDA-C/best.pkl --data_path ./dataset/VISDA-C/validation --label_file ./data/visda_real_train.pkl
 ```
 <!-- 提供模型 -->
 

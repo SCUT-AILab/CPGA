@@ -10,10 +10,11 @@ def arg_parser():
     parser.add_argument('--batchsize', default=64, type=int)
     parser.add_argument('--lr', default=0.01, type=float)
     parser.add_argument('--num_class', default=12, type=int)
-    parser.add_argument('--source_model_path', default='./model_source/20201025-1042-synthesis_resnet101_best.pkl', type=str,
+    parser.add_argument('--source_model_path', default='/mnt/cephfs/home/qiuzhen/244/code/OCT_DAL/model_ada/model_source/20201025-1042-synthesis_resnet101_best.pkl', type=str,
                         help='path to the pre-trained source model')
-    parser.add_argument('--max_epoch', default=400, type=int)
-    parser.add_argument('--data_path', default='/home/linhongbin/UDA/dataset/VISDA-C/validation', type=str,
+    parser.add_argument('--max_epoch', default=1400, type=int)
+    parser.add_argument('--generator_epoch', default=1000, type=int)
+    parser.add_argument('--data_path', default='/mnt/cephfs/home/linhongbin/UDA/dataset/VISDA-C/validation', type=str,
                         help='path to target data')
     parser.add_argument('--label_path', default='./data/visda_real_train.pkl', type=str)
 

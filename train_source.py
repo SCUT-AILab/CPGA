@@ -6,7 +6,7 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.optim.lr_scheduler import MultiStepLR
 import os
-from test import val_office
+from test import val_source
 import torchvision.transforms as transforms
 from dataset import visDataset
 import argparse
@@ -17,14 +17,14 @@ import torch.nn.utils.weight_norm as weightNorm
 
 def arg_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--gpu', default='0', help='gpu device_ids for cuda')
+    parser.add_argument('--gpu', default='2', help='gpu device_ids for cuda')
     parser.add_argument('--batchsize', default=32, type=int)
     parser.add_argument('--lr', default=0.01, type=float)
     parser.add_argument('--MultiStepLR', default=[8, 15, 45, 60], nargs='+', type=int,
                         help='reduce LR by 0.1 when the current epoch is in this list')
     parser.add_argument('--max_epoch', default=100, type=int)
 
-    parser.add_argument('--data_root', default='/home/linhongbin/UDA/dataset/VISDA-C/train', type=str)
+    parser.add_argument('--data_root', default='/mnt/cephfs/home/linhongbin/UDA/dataset/VISDA-C/train', type=str)
     parser.add_argument('--label_file', default='./data/visda_synthesis_9_1_split.pkl', type=str)
 
     args = parser.parse_args()
@@ -53,6 +53,9 @@ class Trainer(object):
         torch.multiprocessing.set_sharing_strategy('file_system')
         args = arg_parser()
         logger = log()
+        model_root = './model_source'
+        if not os.path.exists(model_root):
+            os.mkdir(model_root)
         time_stamp_launch = time.strftime('%Y%m%d') + '-' + time.strftime('%H%M')
         os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
         n_gpus = len(args.gpu.split(','))
@@ -129,8 +132,8 @@ class Trainer(object):
             logger.info("Epoch %d running_loss=%.3f" % (i + 1, avg_loss))
             logger.info("Accuracy of the prediction on the train dataset : %f %%" % (temp_acc))
 
-            # 验证模型
-            acc = val_office(net, val_loader, logger)
+            # valuate the model
+            acc = val_source(net, val_loader)
             if acc >= best_acc:
                 logger.info('saving the best model!')
                 torch.save(net, './model_source/' + time_stamp_launch + '-' + dataset_name +'9_1_resnet50_best.pkl')

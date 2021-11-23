@@ -214,7 +214,7 @@ class Trainer(object):
 
         adv_loss = Variable(torch.tensor(0.).cuda())
         source_dann = Variable(torch.tensor(0.).cuda())
-        if epoch < 10:
+        if (epoch - self.generator_epoch) < self.warm_epoch:
             adv_loss = ls_distance(discriminator(all_fea.cuda(), self.p), 'target').cuda()
             source_dann = ls_distance(discriminator(sor_img, self.p), 'source').cuda()
 
@@ -264,7 +264,7 @@ class Trainer(object):
                                      label=torch.from_numpy(tgt_pre_label[t_indx[all_in]]).cuda(),
                                      contrastive_loss=total_contrastive_loss, confi_weight=sam_confidence[t_indx[all_in]])
 
-        if epoch < (self.warm_epoch + 10):
+        if (epoch - self.generator_epoch) < self.warm_epoch:
             loss = adv_loss + source_dann
         else:
             loss = elr_loss + loss_nc
@@ -350,7 +350,8 @@ class Trainer(object):
         image_size = (224, 224)
         num_cls = self.args.num_class
 
-        self.generator_epoch = 0
+        self.generator_epoch = self.args.generator_epoch
+        self.warm_epoch = 10
         n_epoch = self.args.max_epoch
         weight_decay = 1e-6
         momentum = 0.9
@@ -396,8 +397,7 @@ class Trainer(object):
         self.elr_loss = elr_loss(num_examp=test_dataset.__len__(), num_classes=12).cuda()
 
         generator = generator_fea_deconv(class_num=num_cls)
-        # generator = torch.load('./model_source/generator_visda.pkl')
-        # generator = generator.module
+
         discriminator = Discriminator_fea()
         source_net = torch.load(self.args.source_model_path)
         source_classifier = Classifier(num_classes=num_cls)
@@ -497,7 +497,7 @@ class Trainer(object):
 
                 self.alpha = 0.9 - (epoch - self.generator_epoch) / (n_epoch - self.generator_epoch) * 0.2
 
-                # obtain the target pseudo label and confidence weoight
+                # obtain the target pseudo label and confidence weight
                 pseudo_label, pseudo_label_acc, all_indx, confidence_weight = self.obtain_pseudo_label_and_confidence_weight(
                     test_loader, source_net)
 
@@ -551,7 +551,7 @@ class Trainer(object):
                     'contrastive_loss: %f'
                     % (contrastive_loss))
                 self.logger.info('loss: %f' % loss)
-                accu, ac_list = val_pclass(source_net, test_loader, self.logger)
+                accu, ac_list = val_pclass(source_net, test_loader)
                 self.writer.add_scalar('test_acc', accu,
                                        global_step=current_step)
                 self.logger.info(ac_list)

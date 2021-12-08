@@ -58,6 +58,9 @@ Classification accuracies (%) on the large-scale **VisDA** dataset (ResNet-101).
 | CPGA (ours)  |95.6|89.0|75.4|64.9|91.7|97.5|89.7|83.8|93.9|93.4|87.7|69.0| 86.0 |[Download](https://drive.google.com/file/d/1LyRdK_CxHjY8QRklG65xErl7P4Itv7hM/view?usp=sharing) |
 
 
+# Visualization
+We have released the code in './visualization'. 
+
 
 # Citation
 If you find our work useful in your research, please cite the following paper:

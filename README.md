@@ -59,7 +59,7 @@ Classification accuracies (%) on the large-scale **VisDA** dataset (ResNet-101).
 
 
 # Visualization
-We have released the code in './visualization'. 
+We have released the code in the directory `./visualization`. 
 
 
 # Citation

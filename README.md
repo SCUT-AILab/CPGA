@@ -76,6 +76,6 @@ If you find our work useful in your research, please cite the following paper:
 # Contact
 For any question, please file an issue or contact
 ```
-Zhen Qiu: seqiuzhen@mail.scut.edu.cn
+Zhen Qiu: qiuzhenscut@gmail.com
 Hongbin Lin: sehongbinlin@mail.scut.edu.cn
 ```
